@@ -1,0 +1,8 @@
+body { font-family: Arial, sans-serif; background:#f7f7f7; }
+.container { max-width:720px; margin:30px auto; padding:18px; background:white; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.06);}
+h1 { text-align:center; margin-bottom:8px; }
+textarea { width:100%; min-height:90px; font-size:18px; padding:12px; margin-top:10px; border-radius:8px; }
+.controls { display:flex; gap:10px; justify-content:center; margin-bottom:8px;}
+.speakBtn { padding:12px 18px; font-size:18px; border-radius:10px; }
+.actions { display:flex; gap:12px; margin-top:10px; justify-content:center; }
+.adviceCard { margin-top:16px; padding:12px; background:#fcfcfc; border-radius:8px; border:1px solid #eee; }
