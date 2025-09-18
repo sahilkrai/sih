@@ -1,8 +1,8 @@
 .query-section {
-  padding: 3rem 2rem;
+  padding: 2rem 1.5rem;
   text-align: center;
   background: #fff;
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   max-width: 800px;
   border-radius: 1rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -17,8 +17,8 @@
 /* Spline 3D */
 .query-spline {
   width: 100%;
-  height: 300px;
-  margin-bottom: 1.5rem;
+  height: 280px;
+  margin-bottom: 1.25rem;
 }
 
 .query-spline spline-viewer {
@@ -54,16 +54,20 @@
 /* Circular 3D Model */
 .query-spline-circle {
   position: relative;
-  width: 520px;
-  height: 220px;
-  margin: 0 auto 1.5rem;
-  
+  width: 100%;
+  max-width: 520px; /* Prevent overflow on smaller screens */
+  aspect-ratio: 26 / 11; /* ~520x220 ratio */
+  margin: 0 auto 1.25rem;
   overflow: hidden;
-  
   background: #fff;
+  min-height: 180px; /* Ensure visible area even if custom element loads slowly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .query-spline-circle spline-viewer {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -73,16 +77,16 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: 0;
-  width: 270px;
-  height: 130px;
+  left: 0;
+  width: 100%;
+  height: 74px; /* slightly higher to fully hide badge */
   background: #fff !important;
-  z-index: 101 !important;
+  z-index: 10 !important; /* below navbar (navbar is 1000) */
   pointer-events: none;
   opacity: 1 !important;
-  /* Complete coverage first, then blend edges */
-  mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
-  -webkit-mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
+  /* fade upwards so it blends with the scene */
+  mask: linear-gradient(to top, black 75%, transparent 100%);
+  -webkit-mask: linear-gradient(to top, black 75%, transparent 100%);
 }
 
 /* Additional aggressive watermark hiding */
@@ -98,20 +102,17 @@
   opacity: 0 !important;
 }
 
-/* ✅ Hides the watermark */
+/* Hides the watermark */
 .query-spline-circle .watermark-cover {
   position: absolute;
   bottom: 0;
-  right: 0;
-  width: 270px;
-  height: 130px;
+  left: 0;
+  width: 100%;
+  height: 74px; /* match pseudo-element */
   background: #fff !important;
-  z-index: 100 !important;
+  z-index: 10 !important; /* below navbar (navbar is 1000) */
   pointer-events: none;
-  border-radius: 0 0 0 12px;
   opacity: 1 !important;
-  /* Complete coverage first, then blend edges */
-  mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
-  -webkit-mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
+  mask: linear-gradient(to top, black 75%, transparent 100%);
+  -webkit-mask: linear-gradient(to top, black 75%, transparent 100%);
 }
-

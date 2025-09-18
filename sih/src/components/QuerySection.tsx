@@ -1,28 +1,49 @@
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MicrophoneButton from "./MicrophoneButton";
 import MostAskedQuestions from "./MostAskedQuestions";
 import "../styles/QuerySection.css";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': any;
+    }
+  }
+}
 
 function QuerySection() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const handleSubmit = (text) => {
     if (!text.trim()) return;
     setResult(`You asked: ${text}`);
+    // After asking a question, show suggestions for more ideas
+    setShowSuggestions(true);
   };
 
   const handleQuestionSelect = (selectedQuestion) => {
     setQuery(selectedQuestion);
-    setShowSuggestions(false);
     handleSubmit(selectedQuestion);
   };
 
-  return (
-    <section id="query" className="query-section">
-      <h2>Ask me anything</h2>
+  // Hide suggestions only when clicking outside the query section
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as Node | null;
+      if (containerRef.current && target && !containerRef.current.contains(target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
 
+  return (
+    <section id="query" className="query-section" ref={containerRef}>
+      <h3 className="query-heading">Ask me anything</h3>
       {/* Circular Spline Viewer */}
       <div className="query-spline-circle">
         <spline-viewer url="https://prod.spline.design/KNvm0F5ZCt9Zdwvc/scene.splinecode"></spline-viewer>

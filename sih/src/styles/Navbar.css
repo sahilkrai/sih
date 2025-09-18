@@ -1,5 +1,51 @@
-/* Import colors */
 @import "./colors.css";
+
+/* Final override to ensure white background on scroll up */
+nav.navbar.scrolled.scrolling-up {
+  background: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Malayalam specific compact sizing to avoid overflow when labels are longer */
+html[lang="ml"] .navbar .nav-desktop {
+  gap: 6px;
+}
+
+html[lang="ml"] .navbar .logo {
+  font-size: 18px;
+}
+
+html[lang="ml"] .navbar .nav-link {
+  font-size: 12.5px;
+  padding: 4px 8px;
+}
+
+html[lang="ml"] .navbar .auth-btn {
+  font-size: 12.5px;
+  padding: 5px 10px;
+}
+
+html[lang="ml"] .navbar .lang-select {
+  padding: 2px 6px;
+  font-size: 12px;
+  max-width: 64px;
+}
+
+html[lang="ml"] .navbar .navbar-container {
+  padding: 0 12px;
+}
+
+/* Allow wrap earlier on medium screens to accommodate longer words */
+@media (max-width: 1024px) {
+  .nav-desktop {
+    flex-wrap: wrap;
+  }
+}
+
+nav.navbar.scrolled.scrolling-up .logo,
+nav.navbar.scrolled.scrolling-up .nav-link {
+  color: var(--color-text) !important;
+}
 
 /* Base navbar styles */
 .navbar {
@@ -8,18 +54,39 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: #e6f2ff;
+  border-bottom: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  height: 50px;
+  /* Let navbar grow vertically if content wraps */
+  min-height: 50px;
+  box-shadow: none;
+  padding: 10px 0;
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #e6f2ff;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* When user scrolls up, make navbar white for clarity */
+.navbar.scrolling-up {
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* If both scrolled and scrolling-up, force white */
+.navbar.scrolled.scrolling-up {
+  background: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.navbar.scrolling-up .nav-link {
+  color: var(--color-text);
+}
+
+.navbar.scrolling-up .auth-btn.login {
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .navbar-container {
@@ -34,9 +101,9 @@
 
 /* Logo */
 .logo {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
-  color: var(--color-green);
+  color: #4CAF50;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -44,7 +111,11 @@
 
 .logo:hover {
   transform: scale(1.05);
-  color: var(--color-green-light);
+}
+
+/* Hide hamburger on desktop by default */
+.hamburger {
+  display: none;
 }
 
 .navbar.scrolled .logo {
@@ -53,30 +124,62 @@
 
 /* Desktop Navigation */
 .nav-desktop {
-  display: none; /* Hide desktop navigation */
+  display: flex; /* Show desktop navigation by default */
+  align-items: center;
+  gap: 15px;
+  margin-left: auto; /* Push navigation links to the right */
+  /* Allow wrapping when labels are longer (e.g., Malayalam) or window is narrower */
+  flex-wrap: wrap;
 }
 
-/* Show hamburger on all screen sizes */
-.hamburger {
-  display: flex;
+/* Language selector */
+.lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: #fff;
+  color: var(--color-text);
+  font: inherit;
+}
+
+.lang-select:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none; /* Hide desktop navigation on mobile */
+  }
+  
+  .hamburger {
+    display: flex; /* Show hamburger on mobile */
+  }
 }
 
 /* Navigation links */
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   background: none;
   border: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--color-text); /* FIX: dark text instead of white */
+  color: var(--color-text);
   cursor: pointer;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  font-family: inherit;
 }
 
 .nav-link::before {
@@ -100,7 +203,19 @@
 }
 
 .nav-icon {
+  font-size: 16px;
+  color: var(--color-green);
+  margin-right: 2px;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.1);
+}
+
+.auth-icon {
   font-size: 14px;
+  margin-right: 4px;
 }
 
 .navbar.scrolled .nav-link {
@@ -116,13 +231,17 @@
 .auth-btn {
   border: none;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 6px 14px;
+  padding: 8px 16px;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-btn.login {
@@ -166,27 +285,33 @@
   color: white;
 }
 
-/* Hamburger Menu */
+/* Outline style to match HeroSection's Learn More button */
+.auth-btn.outline {
+  background: transparent;
+  color: var(--color-green);
+  border: 2px solid var(--color-green);
+}
+
+.auth-btn.outline:hover {
+  background: var(--color-green);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Hamburger Menu Styles */
 .hamburger {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
+  padding: 8px;
+  border-radius: 8px;
   transition: all 0.3s ease;
+  color: var(--color-green);
 }
 
 .hamburger:hover {
   background: rgba(0, 0, 0, 0.05);
-}
-
-.hamburger-line {
-  width: 20px;
-  height: 2px;
-  background: var(--color-text); /* FIX: dark lines */
-  margin: 2px 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 1px;
+  transform: scale(1.05);
 }
 
 .navbar.scrolled .hamburger-line {
@@ -233,41 +358,77 @@
   right: -300px; /* Start off-screen with wider menu */
   width: 300px; /* Increased width for better usability */
   height: 100vh;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95));
+  background: white;
   backdrop-filter: blur(10px);
   z-index: 10001;
-  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
   border-left: 1px solid rgba(76, 175, 80, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile-menu.active {
   right: 0;
 }
 
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-header h3 {
+  margin: 0;
+  color: var(--color-green);
+  font-size: 18px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--color-green);
+}
+
 .mobile-menu-content {
-  padding: 0 20px 20px; /* Adjusted padding */
+  padding: 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Added scrolling for content */
-  gap: 15px; /* Added gap between items */
+  overflow-y: auto;
+  gap: 10px;
 }
 
 .mobile-link {
-  padding: 12px 16px;
-  margin: 8px 0;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 14px 16px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.02);
   color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
 }
 
 .mobile-link:hover {
@@ -276,14 +437,13 @@
   color: var(--color-green);
 }
 
+/* Show icons inside mobile menu items */
 .mobile-link .mobile-icon {
-  font-size: 1.2rem;
-  color: var(--color-green);
-  transition: transform 0.3s ease;
+  display: inline-block;
 }
 
 .mobile-link:hover .mobile-icon {
-  transform: scale(1.1);
+  transform: none;
 }
 
 .mobile-menu-header {

@@ -5,10 +5,6 @@ function StatsSection() {
   return (
     <section className="stats">
       <div className="stat-box">
-        <h3>1M+</h3>
-        <p>Advisories Given</p>
-      </div>
-      <div className="stat-box">
         <h3>120+</h3>
         <p>Crops Supported</p>
       </div>

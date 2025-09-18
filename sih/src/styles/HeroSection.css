@@ -1,363 +1,123 @@
-:root {
-  --color-bg-start: #e6f0fa;   /* bluish start */
-  --color-bg-end:   #d1e2f5;   /* bluish end */
-  --color-text:     #1f2c3a;   /* dark text */
-  --color-accent:   #00c853;   /* green accent */
-  --color-button-text: #ffffff;
-}
-
-/* HERO SECTION */
 .hero {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: space-between !important;
   min-height: 100vh;
-  padding: 20px;
-  gap: 40px;
-  width: 100%;
-  box-sizing: border-box;
-  background: linear-gradient(135deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
-  flex-wrap: nowrap; /* prevent stacking */
-  position: relative;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column !important;
-    padding: 15px;
-    gap: 20px;
-  }
-  
-  .hero-left {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-    padding: 15px;
-    align-items: center; /* Center items on mobile */
-    text-align: center; /* Center text on mobile */
-  }
-  
-  .hero-location-input {
-    max-width: 100%;
-    align-self: center; /* Center on mobile */
-    margin-left: auto; /* Center on mobile */
-    margin-right: auto; /* Center on mobile */
-  }
-  
-  .hero-buttons {
-    justify-content: center; /* Center buttons on mobile */
-  }
-}
-
-/* Seamless background blend */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
-  z-index: -1;
-  border-radius: 0;
-}
-
-/* LEFT SIDE */
-.hero-left {
-  flex: 0 0 45% !important;
-  max-width: 45% !important;
-  padding: 20px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  background: transparent;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+  background: #e6f2ff;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0; /* Avoid pulling hero under the fixed navbar */
 }
 
-.hero-left h1 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: bold;
-  color: var(--color-text);
-  margin-bottom: 15px;
-  line-height: 1.2;
+.hero-center {
+  flex: 1;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 0; /* Ensure heading stays visible on all screens */
+  transform: translateY(-12px); /* Subtle lift without affecting flow */
 }
 
-.hero-left h1 span {
-  color: var(--color-accent);
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
-.hero-left p {
-  font-size: 1rem;
-  color: #4a5a6a;
-  margin-bottom: 20px;
-  line-height: 1.5;
+.hero h1 span {
+  color: #4CAF50;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #555;
+  line-height: 1.6;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-/* LOCATION INPUT */
-.hero-location-input {
-  margin-top: 25px;
-  width: 100%;
-  max-width: 280px; /* Further reduced width */
-  align-self: flex-start; /* Align with the welcome text */
-  margin-left: 0; /* Align with the left edge of the text */
-}
-
-.location-input-group {
-  display: flex;
-  gap: 5px;
-  background: white; /* White background as requested */
-  padding: 3px;
+.btn {
+  padding: 0.8rem 1.5rem;
   border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.location-input-group input {
-  flex: 1;
-  padding: 8px 12px; /* Even smaller padding */
-  border: none;
-  border-radius: 25px;
-  font-size: 0.85rem; /* Smaller font */
-  color: var(--color-text);
-  background: transparent;
-  width: calc(100% - 60px); /* Account for button width */
-  text-align: center; /* Center the placeholder text */
-}
-
-.location-input-group input:focus {
-  outline: none;
-}
-
-.location-submit-btn {
-  background: var(--color-accent);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  padding: 6px 10px; /* Even smaller padding */
-  font-size: 0.8rem; /* Smaller font */
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 40px; /* Smaller minimum width */
-  position: absolute;
-  right: 3px;
-  top: 3px;
-  bottom: 3px;
-}
-
-.location-submit-btn:hover {
-  background: #00a844;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
-}
-
-/* BUTTONS - small & modern */
-.btn {
-  padding: 6px 16px !important;      /* smaller padding */
-  font-size: 12px !important;        /* smaller text */
-  font-weight: 500;
-  border-radius: 30px !important;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-  border: 2px solid var(--color-accent);
   text-decoration: none;
   display: inline-block;
 }
 
-.btn.solid {
-  background: linear-gradient(135deg, #00c853, #00b14f);
-  color: var(--color-button-text);
-  border: 2px solid var(--color-accent);
+.solid {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
 }
 
-.btn.solid:hover {
-  background: #00b14f; /* slightly darker green */
-  transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
+.solid:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
 }
 
-.btn.outline {
-  background: transparent;
-  color: var(--color-accent);
+.outline {
+  background-color: transparent;
+  color: #4CAF50;
+  border: 2px solid #4CAF50;
 }
 
-.btn.outline:hover {
-  background: var(--color-accent);
-  color: var(--color-button-text);
-  transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
+.outline:hover {
+  background-color: #4CAF50;
+  color: white;
+  transform: translateY(-2px);
 }
 
-/* RIGHT SIDE - Spline */
-.hero-right {
-  flex: 0 0 45% !important;
-  max-width: 45% !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  padding: 10px;
-}
-
-.spline-wrapper {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  max-width: 600px;
-  background: transparent;
-  overflow: hidden;
-  box-shadow: none;
-  backdrop-filter: none;
-  border-radius: 20px;
-}
-
-
-.spline-wrapper spline-viewer {
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: transparent;
-}
-
-/* Hide Spline watermark elements */
-.spline-wrapper spline-viewer::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 270px;
-  height: 130px;
-  background: linear-gradient(135deg, #e6f0fa 0%, #d1e2f5 100%) !important;
-  z-index: 10000 !important;
-  pointer-events: none;
-  opacity: 1 !important;
-  /* Complete coverage first, then blend edges */
-  mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
-  -webkit-mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
-}
-
-/* Additional aggressive watermark hiding */
-.spline-wrapper * {
-  position: relative;
-}
-
-.spline-wrapper [class*="watermark"],
-.spline-wrapper [class*="logo"],
-.spline-wrapper [class*="brand"],
-.spline-wrapper [class*="spline"],
-.spline-wrapper [class*="tool"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-/* Hide any text elements that might be watermarks */
-.spline-wrapper canvas + div,
-.spline-wrapper div[style*="position: absolute"],
-.spline-wrapper div[style*="bottom"],
-.spline-wrapper div[style*="right"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-/* COVER WATERMARK - Complete Coverage with Blend */
-.watermark-cover {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 270px;
-  height: 130px;
-  background: linear-gradient(135deg, #e6f0fa 0%, #d1e2f5 100%) !important;
-  z-index: 9999 !important;
-  pointer-events: none;
-  border-radius: 0 0 0 12px;
-  opacity: 1 !important;
-  /* Complete coverage first, then blend edges */
-  mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
-  -webkit-mask: radial-gradient(ellipse 270px 130px at 100% 100%, black 70%, transparent 90%);
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
+/* Responsive styles */
+@media (max-width: 768px) {
   .hero {
     flex-direction: column;
     text-align: center;
-    gap: 30px;
+    padding-top: 16px; /* Slightly less padding on smaller screens */
+    min-height: 70vh; /* Reduce hero height on tablets/large mobiles */
   }
 
-  .hero-left, .hero-right {
-    flex: none;
-    max-width: 100% !important;
-    width: 100% !important;
+  .hero-left {
+    max-width: 100%;
   }
 
-  .hero-left h1 {
+  .hero h1 {
     font-size: 2rem;
   }
 
-  .hero-left p {
-    font-size: 0.95rem;
+  .hero-center {
+    transform: none; /* Remove lift to avoid extra height */
   }
 
   .hero-buttons {
     justify-content: center;
-  }
-
-  .btn {
-    width: auto !important;
-    padding: 6px 14px !important;
-    font-size: 12px !important;
-  }
-
-  .spline-wrapper {
-    height: 300px;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Tighter spacing */
+    margin-bottom: 1.25rem; /* Reduce bottom spacing */
   }
 }
 
 @media (max-width: 480px) {
-  .hero-left h1 {
+  .hero {
+    min-height: 60vh; /* More compact on small phones */
+    padding-top: 12px;
+  }
+  .hero h1 {
     font-size: 1.8rem;
   }
 
-  .hero-left p {
-    font-size: 0.9rem;
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 1.25rem; /* Reduce spacing to fit content */
   }
-
-  .btn {
-    width: 120px !important;
-    padding: 5px 12px !important;
-    font-size: 11px !important;
-  }
-
-  .spline-wrapper {
-    height: 250px;
-  }
-}
-
-/* Ensure all hero elements have unified background */
-.hero,
-.watermark-cover {
-  background: linear-gradient(135deg, #e6f0fa 0%, #d1e2f5 100%);
-}
-
-/* Seamless blend between sections */
-.hero-left,
-.hero-right {
-  background: rgba(230, 240, 250, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }

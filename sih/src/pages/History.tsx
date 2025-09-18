@@ -1,15 +1,18 @@
+import React from "react";
 import "../styles/History.css";
+import { useTranslation } from 'react-i18next';
 
 function History() {
+  const { t } = useTranslation();
   const qaData = [
-    { q: "What is AI?", a: "AI is artificial intelligence that simulates human intelligence." },
-    { q: "What is AgriAid?", a: "AgriAid helps farmers with smart agricultural solutions." },
-    { q: "How can I use it?", a: "Simply type your query and get instant insights." },
+    { q: t('history.whatIsAIQ'), a: t('history.whatIsAIA') },
+    { q: t('history.whatIsBrandQ', { brand: t('brand') }), a: t('history.whatIsBrandA', { brand: t('brand') }) },
+    { q: t('history.howUseQ'), a: t('history.howUseA') },
   ];
 
   return (
     <div className="history-container">
-      <h2>History</h2>
+      <h2>{t('history.title')}</h2>
       <div className="qa-list">
         {qaData.map((item, index) => (
           <div key={index} className="qa-item">
