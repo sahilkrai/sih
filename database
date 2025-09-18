@@ -1,0 +1,127 @@
+-- 1. Farmers Table
+CREATE TABLE Farmers (
+    farmer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    location VARCHAR(100),
+    language VARCHAR(20) DEFAULT 'Malayalam',
+    crops_grown VARCHAR(255),   -- Comma-separated or link to another table
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Crops Table
+CREATE TABLE Crops (
+    crop_id INT AUTO_INCREMENT PRIMARY KEY,
+    crop_name VARCHAR(100) NOT NULL,
+    season VARCHAR(50),
+    common_pests TEXT,
+    common_diseases TEXT
+);
+
+-- 3. Queries Table
+CREATE TABLE Queries (
+    query_id INT AUTO_INCREMENT PRIMARY KEY,
+    farmer_id INT,
+    query_text TEXT,
+    query_type ENUM('text','voice','image') DEFAULT 'text',
+    image_url VARCHAR(255),
+    voice_url VARCHAR(255),
+    crop_id INT,
+    status ENUM('pending','answered','escalated') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (farmer_id) REFERENCES Farmers(farmer_id),
+    FOREIGN KEY (crop_id) REFERENCES Crops(crop_id)
+);
+
+-- 4. Advisories Table
+CREATE TABLE Advisories (
+    advisory_id INT AUTO_INCREMENT PRIMARY KEY,
+    query_id INT,
+    ai_response TEXT,
+    officer_response TEXT,
+    final_response TEXT,
+    is_escalated BOOLEAN DEFAULT FALSE,
+    responded_at TIMESTAMP,
+    FOREIGN KEY (query_id) REFERENCES Queries(query_id)
+);
+
+-- 5. Officers Table
+CREATE TABLE Officers (
+    officer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    designation VARCHAR(50),
+    location VARCHAR(100),
+    phone VARCHAR(15)
+);
+
+-- 6. Feedback Table
+CREATE TABLE Feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    advisory_id INT,
+    farmer_id INT,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comments TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (advisory_id) REFERENCES Advisories(advisory_id),
+    FOREIGN KEY (farmer_id) REFERENCES Farmers(farmer_id)
+);
+
+-- 7. Schemes Table
+CREATE TABLE Schemes (
+    scheme_id INT AUTO_INCREMENT PRIMARY KEY,
+    scheme_name VARCHAR(200),
+    description TEXT,
+    eligibility TEXT,
+    benefits TEXT,
+    link VARCHAR(255)
+);
+
+-- 8. Weather Data Table
+CREATE TABLE Weather (
+    weather_id INT AUTO_INCREMENT PRIMARY KEY,
+    location VARCHAR(100),
+    temperature FLOAT,
+    rainfall FLOAT,
+    humidity FLOAT,
+    forecast TEXT,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 9. Knowledge Base (for AI training / references)
+CREATE TABLE KnowledgeBase (
+    kb_id INT AUTO_INCREMENT PRIMARY KEY,
+    crop_id INT,
+    pest_name VARCHAR(100),
+    disease_name VARCHAR(100),
+    remedy TEXT,
+    prevention TEXT,
+    FOREIGN KEY (crop_id) REFERENCES Crops(crop_id)
+);
+-- Insert sample data
+INSERT INTO Farmers (name, phone, location, crops_grown)
+VALUES ('Suresh', '9876543210', 'Kerala', 'Banana, Coconut');
+
+-- Retrieve and display data
+SELECT * FROM Farmers;
+DROP TABLE IF EXISTS faq;
+
+CREATE TABLE faq (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  question TEXT NOT NULL,
+  answer TEXT NOT NULL,
+  crop TEXT,
+  category TEXT
+);
+
+
+INSERT INTO faq (question, answer, crop, category) VALUES
+('Banana leaves show black streaks', 'This may be Kariwela disease. Spray Propiconazole 1 ml per liter of water.', 'banana', 'disease'),
+('When should I release water to paddy fields', 'Usually during June (monsoon season) water should be released.', 'paddy', 'season'),
+('Banana leaves have holes', 'This may be Leaf Miner. Use Neem Oil or suitable organic spray.', 'banana', 'pest'),
+('Mango has black spots', 'This may be Anthracnose disease. Spray Copper Oxychloride 2.5 grams per liter of water.', 'mango', 'disease'),
+('Tomato plant is wilting', 'This may be Wilt disease. Spray Carbendazim 1 gram per liter.', 'tomato', 'disease'),
+('Tiny insects seen on leaves', 'These may be Mites. Spray Sulfur 3 grams per liter of water.', 'banana', 'pest'),
+('When to apply fertilizer in paddy', 'Apply base dose before sowing and top dose after 30 days.', 'paddy', 'fertilizer'),
+('Which pesticide is best', 'The pesticide depends on the crop and pest. Contact local agri officer for safe advice.', 'general', 'safety'),
+('Tomato leaves turning yellow', 'This may indicate nutrient deficiency. Apply nitrogen-rich fertilizer.', 'tomato', 'nutrient'),
+('Paddy leaves turning brown', 'It could be Brown Spot disease. Use Carbendazim 1 gram per liter of water.', 'paddy', 'disease');
