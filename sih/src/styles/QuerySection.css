@@ -1,0 +1,118 @@
+.query-section {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: #fff;
+  margin: 1.5rem auto;
+  max-width: 800px;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.query-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+}
+
+/* Spline 3D */
+.query-spline {
+  width: 100%;
+  height: 280px;
+  margin-bottom: 1.25rem;
+}
+
+.query-spline spline-viewer {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+/* Input + mic */
+.query-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  background: #f9f9f9;
+}
+
+.query-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.query-result {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #444;
+}
+/* Circular 3D Model */
+.query-spline-circle {
+  position: relative;
+  width: 100%;
+  max-width: 520px; /* Prevent overflow on smaller screens */
+  aspect-ratio: 26 / 11; /* ~520x220 ratio */
+  margin: 0 auto 1.25rem;
+  overflow: hidden;
+  background: #fff;
+  min-height: 180px; /* Ensure visible area even if custom element loads slowly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.query-spline-circle spline-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hide Spline watermark elements */
+.query-spline-circle spline-viewer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 74px; /* slightly higher to fully hide badge */
+  background: #fff !important;
+  z-index: 10 !important; /* below navbar (navbar is 1000) */
+  pointer-events: none;
+  opacity: 1 !important;
+  /* fade upwards so it blends with the scene */
+  mask: linear-gradient(to top, black 75%, transparent 100%);
+  -webkit-mask: linear-gradient(to top, black 75%, transparent 100%);
+}
+
+/* Additional aggressive watermark hiding */
+.query-spline-circle * {
+  position: relative;
+}
+
+.query-spline-circle [class*="watermark"],
+.query-spline-circle [class*="logo"],
+.query-spline-circle [class*="brand"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hides the watermark */
+.query-spline-circle .watermark-cover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 74px; /* match pseudo-element */
+  background: #fff !important;
+  z-index: 10 !important; /* below navbar (navbar is 1000) */
+  pointer-events: none;
+  opacity: 1 !important;
+  mask: linear-gradient(to top, black 75%, transparent 100%);
+  -webkit-mask: linear-gradient(to top, black 75%, transparent 100%);
+}
