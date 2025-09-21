@@ -1,29 +1,24 @@
-import { useState } from "react";
+import React from "react";
 import "../styles/MostAskedQuestions.css";
+import { useTranslation } from "react-i18next";
 
-function MostAskedQuestions({ onQuestionSelect }) {
-  const commonQuestions = [
-    "What crops are suitable for my region?",
-    "How to identify tomato leaf disease?",
-    "Best practices for organic farming",
-    "How to increase crop yield naturally?",
-    "Government schemes for farmers",
-    "Weather forecast for next week",
-    "How to control pests without chemicals?",
-    "Best irrigation methods for water conservation"
-  ];
+type QAItem = { question: string; answer: string };
+
+function MostAskedQuestions({ onQuestionSelect }: { onQuestionSelect: (item: QAItem) => void }) {
+  const { t } = useTranslation();
+  const commonQuestions = (t('query.qa', { returnObjects: true }) as unknown as QAItem[]) || [];
 
   return (
     <div className="most-asked-questions">
-      <h3>Most Asked Questions</h3>
+      <h3>{t('query.mostAskedTitle')}</h3>
       <div className="questions-list">
-        {commonQuestions.map((question, index) => (
+        {commonQuestions.map((item, index) => (
           <button
             key={index}
             className="question-item"
-            onClick={() => onQuestionSelect(question)}
+            onClick={() => onQuestionSelect(item)}
           >
-            {question}
+            {item.question}
           </button>
         ))}
       </div>

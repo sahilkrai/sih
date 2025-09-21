@@ -33,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="app-container" key={i18n.language}>
         <LanguageModal open={showLangModal} onClose={() => setShowLangModal(false)} />
         <Navbar />
 

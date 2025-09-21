@@ -51,6 +51,17 @@
   font-size: 1.1rem;
   color: #444;
 }
+
+/* Answer styling: match blue/green background used in Most Asked Questions */
+.query-result.answer {
+  background: linear-gradient(135deg, rgba(30, 136, 229, 0.05), rgba(76, 175, 80, 0.05));
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--color-text);
+  text-align: left;
+  line-height: 1.55;
+}
 /* Circular 3D Model */
 .query-spline-circle {
   position: relative;

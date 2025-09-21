@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import MicrophoneButton from "./MicrophoneButton";
 import MostAskedQuestions from "./MostAskedQuestions";
 import "../styles/QuerySection.css";
@@ -12,21 +13,31 @@ declare global {
 }
 
 function QuerySection() {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [result, setResult] = useState("");
+  const [isAnswer, setIsAnswer] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSubmit = (text) => {
+  const handleSubmit = (text: string) => {
     if (!text.trim()) return;
-    setResult(`You asked: ${text}`);
+    setResult(`${t('query.youAsked')}: ${text}`);
+    setIsAnswer(false);
     // After asking a question, show suggestions for more ideas
     setShowSuggestions(true);
   };
 
-  const handleQuestionSelect = (selectedQuestion) => {
-    setQuery(selectedQuestion);
-    handleSubmit(selectedQuestion);
+  type QAItem = { question: string; answer: string };
+
+  const handleQuestionSelect = (item: QAItem) => {
+    // Set the input to the selected question
+    setQuery(item.question);
+    // Show the answer in the result area
+    setResult(item.answer);
+    setIsAnswer(true);
+    // Hide the suggestions after selecting one
+    setShowSuggestions(false);
   };
 
   // Hide suggestions only when clicking outside the query section
@@ -43,7 +54,7 @@ function QuerySection() {
 
   return (
     <section id="query" className="query-section" ref={containerRef}>
-      <h3 className="query-heading">Ask me anything</h3>
+      <h3 className="query-heading">{t('query.heading')}</h3>
       {/* Circular Spline Viewer */}
       <div className="query-spline-circle">
         <spline-viewer url="https://prod.spline.design/KNvm0F5ZCt9Zdwvc/scene.splinecode"></spline-viewer>
@@ -57,7 +68,7 @@ function QuerySection() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit(query)}
-          placeholder="Type or speak your question..."
+          placeholder={t('query.placeholder')}
           className="query-input"
           onFocus={() => setShowSuggestions(true)}
         />
@@ -69,7 +80,9 @@ function QuerySection() {
         />
       </div>
 
-      {result && <p className="query-result">{result}</p>}
+      {result && (
+        <div className={`query-result ${isAnswer ? 'answer' : ''}`}>{result}</div>
+      )}
       {showSuggestions && <MostAskedQuestions onQuestionSelect={handleQuestionSelect} />}
     </section>
   );
