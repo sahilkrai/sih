@@ -31,16 +31,12 @@ function QuerySection() {
   type QAItem = { question: string; answer: string };
 
   const handleQuestionSelect = (item: QAItem) => {
-    // Set the input to the selected question
     setQuery(item.question);
-    // Show the answer in the result area
     setResult(item.answer);
     setIsAnswer(true);
-    // Hide the suggestions after selecting one
     setShowSuggestions(false);
   };
 
-  // Hide suggestions only when clicking outside the query section
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       const target = e.target as Node | null;
@@ -55,13 +51,11 @@ function QuerySection() {
   return (
     <section id="query" className="query-section" ref={containerRef}>
       <h3 className="query-heading">{t('query.heading')}</h3>
-      {/* Circular Spline Viewer */}
       <div className="query-spline-circle">
         <spline-viewer url="https://prod.spline.design/KNvm0F5ZCt9Zdwvc/scene.splinecode"></spline-viewer>
-        <div className="watermark-cover"></div> {/* ✅ hides the watermark */}
+        <div className="watermark-cover"></div>
       </div>
 
-      {/* Input + Mic */}
       <div className="query-box">
         <input
           type="text"

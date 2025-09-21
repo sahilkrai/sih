@@ -1,4 +1,4 @@
-// src/components/StatsSection.jsx
+import React from "react";
 import "../styles/StatsSection.css";
 
 function StatsSection() {

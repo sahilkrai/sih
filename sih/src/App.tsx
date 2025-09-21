@@ -25,7 +25,6 @@ function App() {
     }
   }, [i18n]);
 
-  // Keep <html lang="..."> in sync with selected language for CSS targeting and accessibility
   useEffect(() => {
     const lng = i18n.language?.startsWith('hi') ? 'hi' : i18n.language?.startsWith('ml') ? 'ml' : 'en';
     document.documentElement.setAttribute('lang', lng);

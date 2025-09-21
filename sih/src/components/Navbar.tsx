@@ -26,7 +26,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Close menu on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node | null;
@@ -48,7 +47,6 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Close mobile menu when navigating
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -61,7 +59,6 @@ const Navbar = () => {
       <div className="navbar-container">
         <Link to="/" className="logo">{t('brand')}</Link>
 
-        {/* Desktop Nav */}
         <div className="nav-desktop">
           <Link to="/" className="nav-link">{t('nav.home')}</Link>
           <Link to="/profile" className="nav-link">{t('nav.profile')}</Link>
@@ -69,7 +66,6 @@ const Navbar = () => {
           <Link to="/login" className="auth-btn login">{t('nav.login')}</Link>
           <Link to="/signup" className="auth-btn outline">{t('nav.signup')}</Link>
 
-          {/* Language Switcher (Desktop) */}
           <select
             aria-label="Language selector"
             className="lang-select"
@@ -86,14 +82,11 @@ const Navbar = () => {
           </select>
         </div>
 
-        {/* Mobile Hamburger */}
         <div className="hamburger" onClick={toggleMenu}>
           {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {/* Overlay to cover the page when menu is open */}
       <div
         className={`mobile-menu-overlay ${isOpen ? 'active' : ''}`}
         onClick={() => setIsOpen(false)}
@@ -127,7 +120,6 @@ const Navbar = () => {
             <span>{t('nav.signup')}</span>
           </Link>
 
-          {/* Language Switcher (Mobile) */}
           <div style={{ marginTop: 12 }}>
             <label htmlFor="lang-mobile" style={{ display: 'block', fontSize: 12, opacity: 0.8, marginBottom: 6 }}>{t('modal.chooseLanguage')}</label>
             <select
@@ -154,4 +146,5 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
 

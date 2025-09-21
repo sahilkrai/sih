@@ -7,7 +7,7 @@
   padding: 0 20px;
   position: relative;
   overflow: hidden;
-  margin-top: 0; /* Avoid pulling hero under the fixed navbar */
+  margin-top: 0; 
 }
 
 .hero-center {
@@ -15,8 +15,8 @@
   max-width: 600px;
   text-align: center;
   margin: 0 auto;
-  margin-top: 0; /* Ensure heading stays visible on all screens */
-  transform: translateY(-12px); /* Subtle lift without affecting flow */
+  margin-top: 0; 
+  transform: translateY(-12px); 
 }
 
 .hero h1 {
@@ -78,13 +78,13 @@
   transform: translateY(-2px);
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
     text-align: center;
-    padding-top: 16px; /* Slightly less padding on smaller screens */
-    min-height: 70vh; /* Reduce hero height on tablets/large mobiles */
+    padding-top: 16px; 
+    min-height: 70vh; 
   }
 
   .hero-left {
@@ -96,20 +96,20 @@
   }
 
   .hero-center {
-    transform: none; /* Remove lift to avoid extra height */
+    transform: none; 
   }
 
   .hero-buttons {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem; /* Tighter spacing */
-    margin-bottom: 1.25rem; /* Reduce bottom spacing */
+    gap: 0.5rem; 
+    margin-bottom: 1.25rem; 
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    min-height: 60vh; /* More compact on small phones */
+    min-height: 60vh; 
     padding-top: 12px;
   }
   .hero h1 {
@@ -118,6 +118,6 @@
 
   .hero p {
     font-size: 1rem;
-    margin-bottom: 1.25rem; /* Reduce spacing to fit content */
+    margin-bottom: 1.25rem; 
   }
 }

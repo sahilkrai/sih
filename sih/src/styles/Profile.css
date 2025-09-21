@@ -44,11 +44,7 @@
   cursor: pointer;
 }
 
-.edit-avatar-hint {
-  font-size: 12px;
-  color: #666;
-  margin-top: 8px;
-}
+
 
 .avatar-circle {
   width: 80px;
@@ -64,11 +60,11 @@
 
 .form-group {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   width: 100%;
 }
 
-/* Field icon class removed as icons are no longer used */
+
 
 .form-group input,
 .form-group select {
@@ -97,9 +93,7 @@
   width: 100%;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
+
 
 .profile-container label {
   display: flex;
@@ -139,18 +133,13 @@
   color: white;
 }
 
-.edit-button {
-  background-color: #2c3e50;
-  color: white;
-}
+
 
 .save-button:hover {
   background-color: #00a844;
 }
 
-.edit-button:hover {
-  background-color: #1a2530;
-}
+
 
 .save-button {
   margin-top: 20px;
@@ -168,7 +157,7 @@
   background: darkgreen;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .profile-container {
     width: 85%;

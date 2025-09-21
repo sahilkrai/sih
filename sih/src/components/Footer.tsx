@@ -9,10 +9,9 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Brand / Left Column */}
         <div className="footer-brand">
           <h2>{t('brand')}</h2>
-          <p>Copyright © {new Date().getFullYear()} {t('brand')}</p>
+          <p>Copyright {new Date().getFullYear()} {t('brand')}</p>
           <p>{t('footer.allRights')}</p>
 
           <div className="footer-socials">
@@ -23,7 +22,6 @@ function Footer() {
           </div>
         </div>
 
-        {/* Links / Right Columns */}
         <div className="footer-links">
           <div>
             <h4>{t('footer.quickLinks')}</h4>

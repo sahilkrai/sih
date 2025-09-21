@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/HeroSection.css";
-import { scrollToElement } from "../utils/scrollUtils";
 import { useTranslation } from 'react-i18next';
 
 const HeroSection = () => {

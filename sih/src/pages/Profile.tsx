@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { FaUser, FaPhone, FaLanguage, FaEdit, FaSave, FaMapMarkerAlt, FaSeedling } from "react-icons/fa";
+import { FaUser, FaEdit, FaSave } from "react-icons/fa";
 import "../styles/Profile.css";
 
 function Profile() {
