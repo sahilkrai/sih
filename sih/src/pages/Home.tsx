@@ -1,0 +1,42 @@
+import React from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import HeroSection from "../components/HeroSection";
+import StatsSection from "../components/StatsSection";
+import QuerySection from "../components/QuerySection";
+import AboutSection from "../components/AboutSection";
+import { scrollToElement } from "../utils/scrollUtils";
+
+function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string; offset?: number } | null;
+    if (state?.scrollTo) {
+      setTimeout(() => {
+        scrollToElement(state.scrollTo!, state.offset ?? 80);
+      }, 0);
+    }
+  }, [location.state]);
+
+  useEffect(() => {
+    const hash = location.hash?.replace('#', '');
+    const params = new URLSearchParams(location.search);
+    const fromQuery = params.get('scroll');
+    const target = hash || fromQuery;
+    if (target === 'about') {
+      setTimeout(() => scrollToElement('about', 80), 0);
+    }
+  }, [location.hash, location.search]);
+
+  return (
+    <div>
+      <HeroSection />
+      <QuerySection />
+      <AboutSection />
+      <StatsSection />
+    </div>
+  );
+}
+
+export default Home;
