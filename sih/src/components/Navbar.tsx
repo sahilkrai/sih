@@ -16,7 +16,8 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 20);
+      // Mark as scrolled as soon as user moves from the very top
+      setScrolled(y > 0);
       const delta = y - lastYRef.current;
       setScrollingUp(delta < 0);
       lastYRef.current = y;
@@ -56,7 +57,7 @@ const Navbar = () => {
   return (
     <nav
       className={`navbar ${scrolled ? "scrolled" : ""} ${scrollingUp ? "scrolling-up" : ""} ${isOpen ? "menu-open" : ""}`}
-      style={scrollingUp ? { background: '#ffffff', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' } : undefined}
+      style={scrolled ? { background: '#ffffff', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' } : undefined}
     >
       <div className="navbar-container">
         <Link to="/" className="logo">{t('brand')}</Link>
