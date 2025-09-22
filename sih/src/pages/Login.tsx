@@ -1,14 +1,14 @@
-import React from 'react';
+import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import "../styles/Auth.css";
 
-function Login({ onLogin }) {
+function Login({ onLogin }: { onLogin?: () => void }) {
   const { t } = useTranslation();
   return (
     <div className="auth-container">
       <h2>{t('auth.loginTitle')}</h2>
       <form
-        onSubmit={(e) => {
+        onSubmit={(e: FormEvent) => {
           e.preventDefault();
           if (onLogin) onLogin();
         }}

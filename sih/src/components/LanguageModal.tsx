@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import '../styles/LanguageModal.css';
 
@@ -7,7 +6,7 @@ interface LanguageModalProps {
   onClose: () => void;
 }
 
-const LanguageModal: React.FC<LanguageModalProps> = ({ open, onClose }) => {
+const LanguageModal = ({ open, onClose }: LanguageModalProps) => {
   const { t, i18n } = useTranslation();
 
   if (!open) return null;

@@ -3,14 +3,14 @@
   justify-content: space-around;
   padding: 40px 20px;
   background: white;
-  flex-wrap: wrap; 
-  gap: 16px; 
+  flex-wrap: wrap; /* allow wrapping to prevent overflow */
+  gap: 16px; /* spacing between boxes */
 }
 
 .stat-box {
   text-align: center;
   min-width: 120px;
-  flex: 1 1 160px; 
+  flex: 1 1 160px; /* grow/shrink and allow wrapping */
 }
 
 .stat-box h3 {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/HeroSection.css";
 import { useTranslation } from 'react-i18next';
@@ -36,5 +35,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
-

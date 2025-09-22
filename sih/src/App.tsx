@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Navbar from "./components/Navbar";
@@ -25,6 +25,7 @@ function App() {
     }
   }, [i18n]);
 
+  // Keep <html lang="..."> in sync with selected language for CSS targeting and accessibility
   useEffect(() => {
     const lng = i18n.language?.startsWith('hi') ? 'hi' : i18n.language?.startsWith('ml') ? 'ml' : 'en';
     document.documentElement.setAttribute('lang', lng);
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container" key={i18n.language}>
+      <div className="app-container">
         <LanguageModal open={showLangModal} onClose={() => setShowLangModal(false)} />
         <Navbar />
 

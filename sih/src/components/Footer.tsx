@@ -1,4 +1,3 @@
-import React from 'react';
 import "../styles/Footer.css";
 import { FaInstagram, FaTwitter, FaYoutube, FaWhatsapp } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -9,6 +8,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
+        {/* Brand / Left Column */}
         <div className="footer-brand">
           <h2>{t('brand')}</h2>
           <p>Copyright {new Date().getFullYear()} {t('brand')}</p>
@@ -22,6 +22,7 @@ function Footer() {
           </div>
         </div>
 
+        {/* Links / Right Columns */}
         <div className="footer-links">
           <div>
             <h4>{t('footer.quickLinks')}</h4>

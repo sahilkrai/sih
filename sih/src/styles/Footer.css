@@ -1,11 +1,11 @@
-
+/* Footer Visual Refresh */
 .footer {
   position: relative;
   background: linear-gradient(180deg, #6a92b7 0%, #537ea3 60%, #446f96 100%);
   border-top: 1px solid rgba(255,255,255,0.15);
-  padding: 40px 20px; 
+  padding: 40px 20px; /* same as before */
   color: #f6fbff;
-  margin-top: 40px; 
+  margin-top: 40px; /* same as before */
   overflow: hidden;
 }
 
@@ -46,8 +46,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px; 
-  height: 36px; 
+  width: 36px; /* same as before */
+  height: 36px; /* same as before */
   border-radius: 50%;
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.25);
@@ -114,7 +114,7 @@
   color: #ffffff;
 }
 
-
+/* Animated underline for links */
 .footer-links a::after {
   content: '';
   position: absolute;
@@ -132,7 +132,7 @@
   transform: scaleX(1);
 }
 
-
+/* Responsive */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;

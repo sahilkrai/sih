@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { FaUser, FaEdit, FaSave } from "react-icons/fa";
 import "../styles/Profile.css";
@@ -26,7 +25,7 @@ function Profile() {
     }
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setUserData(prev => ({
       ...prev,

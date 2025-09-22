@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable no-irregular-whitespace */
+import { useEffect, useRef, useState } from 'react';
 import { FaMicrophone, FaStop } from 'react-icons/fa';
 import '../styles/MicrophoneButton.css';
 
@@ -14,7 +15,7 @@ declare global {
   }
 }
 
-const MicrophoneButton: React.FC<MicrophoneButtonProps> = ({ onResult, onAudioCaptured }) => {
+const MicrophoneButton = ({ onResult, onAudioCaptured }: MicrophoneButtonProps) => {
   const [isRecording, setIsRecording] = useState(false);
   const [supportsSpeech, setSupportsSpeech] = useState(false);
   const recognitionRef = useRef<any>(null);
@@ -55,7 +56,9 @@ const MicrophoneButton: React.FC<MicrophoneButtonProps> = ({ onResult, onAudioCa
       // Cleanup
       try {
         recognitionRef.current?.stop();
-      } catch {}
+      } catch {
+        // ignore
+      }
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((t) => t.stop());
       }
@@ -66,7 +69,7 @@ const MicrophoneButton: React.FC<MicrophoneButtonProps> = ({ onResult, onAudioCa
     try {
       recognitionRef.current?.start();
       setIsRecording(true);
-    } catch (err) {
+    } catch {
       // Some browsers throw on double start; ensure state consistency
       setIsRecording(true);
     }
@@ -82,13 +85,16 @@ const MicrophoneButton: React.FC<MicrophoneButtonProps> = ({ onResult, onAudioCa
 
   const startMediaRecorder = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const constraints = { audio: true };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       streamRef.current = stream;
       const recorder = new MediaRecorder(stream);
-      const audioChunks: BlobPart[] = [];
+      const audioChunks: Blob[] = [];
 
       recorder.addEventListener('dataavailable', (event) => {
-        if (event.data && event.data.size > 0) audioChunks.push(event.data);
+        if (event.data && event.data.size > 0) {
+          audioChunks.push(event.data as Blob);
+        }
       });
 
       recorder.addEventListener('stop', () => {

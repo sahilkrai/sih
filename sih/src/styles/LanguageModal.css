@@ -13,10 +13,10 @@
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  
+  /* Fixed size for consistency across phone and desktop */
   width: 360px;
   height: 260px;
-  
+  /* Keep it usable on very small screens */
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -65,7 +65,7 @@
   background: #45a049;
 }
 
-
+/* Very small phones: slightly reduce fixed size to avoid overflow */
 @media (max-width: 360px) {
   .lang-modal {
     width: 320px;

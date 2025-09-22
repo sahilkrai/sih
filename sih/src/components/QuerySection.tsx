@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import MicrophoneButton from "./MicrophoneButton";
 import MostAskedQuestions from "./MostAskedQuestions";
@@ -52,6 +52,7 @@ function QuerySection() {
     <section id="query" className="query-section" ref={containerRef}>
       <h3 className="query-heading">{t('query.heading')}</h3>
       <div className="query-spline-circle">
+        {/* @ts-ignore - custom element not typed in TSX */}
         <spline-viewer url="https://prod.spline.design/KNvm0F5ZCt9Zdwvc/scene.splinecode"></spline-viewer>
         <div className="watermark-cover"></div>
       </div>

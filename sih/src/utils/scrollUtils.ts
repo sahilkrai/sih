@@ -3,7 +3,7 @@
  * @param {string} elementId - The ID of the element to scroll to
  * @param {number} offset - Optional offset from the top (in pixels)
  */
-export const scrollToElement = (elementId, offset = 0) => {
+export const scrollToElement = (elementId: string, offset: number = 0): void => {
   const element = document.getElementById(elementId);
   
   if (element) {

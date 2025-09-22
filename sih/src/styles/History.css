@@ -23,3 +23,13 @@
   border-radius: 8px;
   border: 1px solid #ddd;
 }
+
+.question {
+  font-weight: bold;
+  color: #333;
+}
+
+.answer {
+  margin-top: 5px;
+  color: #555;
+}
