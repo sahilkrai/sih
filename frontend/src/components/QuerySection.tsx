@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import MicrophoneButton from "./MicrophoneButton";
 import MostAskedQuestions from "./MostAskedQuestions";
 import "../styles/QuerySection.css";
+import Markdown from "react-markdown";
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'spline-viewer': any;
+      "spline-viewer": any;
     }
   }
 }
@@ -14,17 +15,32 @@ declare global {
 function QuerySection() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSubmit = (text) => {
+  const handleSubmit = async (text: string) => {
     if (!text.trim()) return;
-    setResult(`You asked: ${text}`);
-    // After asking a question, show suggestions for more ideas
-    setShowSuggestions(true);
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:3000/api/advice", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: text, language: "english" }),
+      });
+      const data = await res.json();
+      setResult(data.advice);
+      // After asking a question, show suggestions for more ideas
+      setShowSuggestions(true);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching advice:", error);
+    }
   };
 
-  const handleQuestionSelect = (selectedQuestion) => {
+  const handleQuestionSelect = (selectedQuestion: string) => {
     setQuery(selectedQuestion);
     handleSubmit(selectedQuestion);
   };
@@ -33,7 +49,11 @@ function QuerySection() {
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       const target = e.target as Node | null;
-      if (containerRef.current && target && !containerRef.current.contains(target)) {
+      if (
+        containerRef.current &&
+        target &&
+        !containerRef.current.contains(target)
+      ) {
         setShowSuggestions(false);
       }
     };
@@ -69,10 +89,20 @@ function QuerySection() {
         />
       </div>
 
-      {result && <p className="query-result">{result}</p>}
-      {showSuggestions && <MostAskedQuestions onQuestionSelect={handleQuestionSelect} />}
+      {!loading && result && (
+        <p className="query-result">
+          <Markdown>{result}</Markdown>
+        </p>
+      )}
+      {!loading && showSuggestions && (
+        <MostAskedQuestions onQuestionSelect={handleQuestionSelect} />
+      )}
+      {loading && <div className="query-result flex flex-row justify-center"><div className="w-min">Loading...</div></div>}
     </section>
   );
 }
 
 export default QuerySection;
+
+
+// chhod bkl
